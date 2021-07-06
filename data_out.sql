@@ -628,7 +628,7 @@ values
 ('274','Nash Ensemble'),
 ('275','Philip Glass Ensemble');
 
-insert into costomers(CostumerId, FirstName, LastName, Company, Address, City, State, Country, PostelCode, Phone, Fax, Email, SuportRepId)
+insert into customers(CostumerId, FirstName, LastName, Company, Address, City, State, Country, PostelCode, Phone, Fax, Email, SuportRepId)
 values
 ('1','Luís','Gonçalves','Embraer - Empresa Brasileira de Aeronáutica S.A.','Av. Brigadeiro Faria Lima, 2170','São José dos Campos','SP','Brazil','12227-000','+55 (12) 3923-5555','+55 (12) 3923-5566','luisg@embraer.com.br','3'),
 ('2','Leonie','Köhler','','Theodor-Heuss-Straße 34','Stuttgart','','Germany','70174','+49 0711 2842222','','leonekohler@surfeu.de','5'),
