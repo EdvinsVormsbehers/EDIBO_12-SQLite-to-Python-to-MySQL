@@ -45,6 +45,7 @@ def insert_table_data(file_to_read):
     fields = data_lines[-1].split('|')
     file_to_write.write("(\'")
     for field in fields[:-1]:
+        field = field.replace("'", "")
         file_to_write.write(field)
         file_to_write.write("\',\'")
     fields[-1] = fields[-1].replace("'", "")
