@@ -13,6 +13,11 @@ file_to_read_tracks = open('data_in_tracks.txt', 'r')
 file_to_write = open('data_out.sql', 'w')
 
 
+def insert_command(table_name):
+    file_to_write.write("insert into " + table_name + '\n')
+    file_to_write.write("values"'\n')
+
+
 def insert_table_data(file_to_read):
     data = file_to_read.read()
     # print("Result after - file_to_read_albums.read():")
@@ -42,6 +47,7 @@ def insert_table_data(file_to_read):
         file_to_write.write("\',\'")
     file_to_write.write(fields[-1])
     file_to_write.write("\');\n")
+    file_to_write.write("\n")
 
 
 file_to_read_albums.close()
