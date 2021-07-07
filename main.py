@@ -1,5 +1,5 @@
 
-file_to_write = open('data_out_test.sql', 'w')
+file_to_write = open('data_out.sql', 'w')
 
 
 def insert_command(table_name):
