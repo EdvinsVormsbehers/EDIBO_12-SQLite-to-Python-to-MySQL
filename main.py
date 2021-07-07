@@ -1,16 +1,5 @@
-file_to_read_albums = open('data_in_albums.txt', 'r')
-file_to_read_artists = open('data_in_artists.txt', 'r')
-file_to_read_customers = open('data_in_customers.txt', 'r')
-file_to_read_employees = open('data_in_employees.txt', 'r')
-file_to_read_genres = open('data_in_genres.txt', 'r')
-file_to_read_invoice_items = open('data_in_invoice_items.txt', 'r')
-file_to_read_invoices = open('data_in_invoices.txt', 'r')
-file_to_read_media_types = open('data_in_media_types.txt', 'r')
-file_to_read_playlist_track = open('data_in_playlist_track.txt', 'r')
-file_to_read_playlists = open('data_in_playlists.txt', 'r')
-file_to_read_tracks = open('data_in_tracks.txt', 'r')
 
-file_to_write = open('data_out.sql', 'w')
+file_to_write = open('data_out_test.sql', 'w')
 
 
 def insert_command(table_name):
@@ -54,42 +43,51 @@ def insert_table_data(file_to_read):
     file_to_write.write('\n')
 
 
+def file2sql(file):
+   file_to_read = open(file, "r")
+   insert_table_data(file_to_read)
+   file_to_read.close()
+
+
 file_to_write.write("use music_shop;"'\n')
 file_to_write.write('\n')
+file_to_write.write("SET FOREIGN_KEY_CHECKS=0;"'\n')
+file_to_write.write('\n')
+
+insert_command("media_types(MediaTypeId, Name)")
+file2sql('data_in_media_types.txt')
+
+insert_command("genres(GenreId, Name)")
+file2sql('data_in_genres.txt')
+
+insert_command("artists(ArtistId, Name)")
+file2sql('data_in_artists.txt')
+
+insert_command("playlists(PlaylistId, Name)")
+file2sql('data_in_playlists.txt')
 
 insert_command("albums(AlbumId, Title, ArtistId)")
-insert_table_data(file_to_read_albums)
-insert_command("artists(ArtistId, Name)")
-insert_table_data(file_to_read_artists)
-insert_command("customers(CostumerId, FirstName, LastName, Company, Address, City, State, Country, PostelCode, Phone, Fax, Email, SuportRepId)")
-insert_table_data(file_to_read_customers)
-insert_command("employees(EmployeeId, LastName, FirstName, Title, ReportsTo, BirthDate, HireDate, Address, City, State, Country, PostelCode, Phone, Fax, Email)")
-insert_table_data(file_to_read_employees)
-insert_command("genres(GenreId, Name)")
-insert_table_data(file_to_read_genres)
-insert_command("invoice_items(InvoiceLineId, InvoiceId, TrackId, UnitPrice, Quantity)")
-insert_table_data(file_to_read_invoice_items)
-insert_command("invoices(InvoiceId, CustomerId, InvoiceDate, BillingAddress, BillingCity, BillingState, BillingCountry, BillingPostalCode, Total)")
-insert_table_data(file_to_read_invoices)
-insert_command("media_types(MediaTypeId, Name)")
-insert_table_data(file_to_read_media_types)
-insert_command("playlist_tracks(PlaylistId, TrackId, PK_PlaylistTrack)")
-insert_table_data(file_to_read_playlist_track)
-insert_command("playlists(PlaylistId, Name)")
-insert_table_data(file_to_read_playlists)
-insert_command("tracks(TrackId, Name, AlbumId, MediaTypeId, GenreId, Composer, Milliseconds, Bytes, UnitPrice)")
-insert_table_data(file_to_read_tracks)
+file2sql('data_in_albums.txt')
 
-file_to_read_albums.close()
-file_to_read_artists.close()
-file_to_read_customers.close()
-file_to_read_employees.close()
-file_to_read_genres.close()
-file_to_read_invoice_items.close()
-file_to_read_invoices.close()
-file_to_read_media_types.close()
-file_to_read_playlist_track.close()
-file_to_read_playlists.close()
-file_to_read_tracks.close()
+insert_command("tracks(TrackId, Name, AlbumId, MediaTypeId, GenreId, Composer, Milliseconds, Bytes, UnitPrice)")
+file2sql('data_in_tracks.txt')
+
+insert_command("playlist_track(PlaylistId, TrackId)")
+file2sql('data_in_playlist_track.txt')
+
+insert_command("employees(EmployeeId, LastName, FirstName, Title, ReportsTo, BirthDate, HireDate, Address, City, State, Country, PostalCode, Phone, Fax, Email)")
+file2sql('data_in_employees.txt')
+
+insert_command("customers(CustomerId, FirstName, LastName, Company, Address, City, State, Country, PostalCode, Phone, Fax, Email, SupportRepId)")
+file2sql('data_in_customers.txt')
+
+insert_command("invoices(InvoiceId, CustomerId, InvoiceDate, BillingAddress, BillingCity, BillingState, BillingCountry, BillingPostalCode, Total)")
+file2sql('data_in_invoices.txt')
+
+insert_command("invoice_items(InvoiceLineId, InvoiceId, TrackId, UnitPrice, Quantity)")
+file2sql('data_in_invoice_items.txt')
+
+file_to_write.write("SET FOREIGN_KEY_CHECKS=1;"'\n')
+file_to_write.write('\n')
 
 file_to_write.close()
